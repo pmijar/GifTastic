@@ -11,7 +11,7 @@ Date: 09-Dev-2018
 var GIF_LIMIT = 10;
 
 // Initial array of topics
-var topics = ["The Matrix", "The Notebook", "Mr. Nobody", "The Lion King"];
+var topics = ["Cats", "Dogs", "Pengiun", "Eagle"];
 
 $(document).ready(function() {
 
@@ -20,16 +20,28 @@ renderButtons();
 $("#add-gif").on("click", function(event) {
   event.preventDefault();
   var gifVal = $("#gif-input").val().trim();
-  topics.push(gifVal);
+  $("#Message").empty();
+  if(topics.includes(firstCapital(gifVal)) || gifVal === ""){
+    console.log("Topic already added  or nothing entered!!!!");
+    $("#Message").attr("class", "alert-danger");
+    $("#Message").append("Topic already added or nothing typed.");
+  }
+  else{
+    console.log("NEW Topic added.....");     
+    topics.push(firstCapital(gifVal));
+  }
+
   renderButtons();
 });
 
 $("#gifButtonView").on("click","button",function(){
+    $("#Message").empty();
     console.log("data-name ::"+$(this).attr("data-name"));
     displayGIFInfo($(this).attr("data-name"));
 })
 
-$("#gifView").on("click","img", function() {
+$(".checkRow").on("click","img", function() {
+    $("#Message").empty();
     console.log($(this));
     var state = $(this).attr("state");
 
@@ -46,6 +58,7 @@ $("#gifView").on("click","img", function() {
 
 
 })
+
 
 function renderButtons(){
     $("#gifButtonView").empty();
@@ -71,11 +84,10 @@ function renderButtons(){
           method: "GET"
         }).then(function(response) {
             console.log(response);
-            $("#gifView").empty();
             for(var i=0; i<response.data.length; i++ ){
                 var gifDiv = $("<div class='gif'>");
                 var image = $("<img>");
-                image.attr("class","rounded clear-both");
+                image.attr("class","rounded");
                 var rating = response.data[i].rating;    
                 var urlStill = response.data[i].images.original_still.url;
                 var urlPlay = response.data[i].images.fixed_height.url;  
@@ -86,7 +98,12 @@ function renderButtons(){
                 var gifRating = $("<p>").text("Rating: " + rating);
                 gifDiv.append(image);    
                 gifDiv.append(gifRating) 
-                $("#gifView").append(gifDiv);
+                $("#gifView"+i).empty();
+                $("#gifView"+i).append(gifDiv);
             }
         });
       }
+
+    function firstCapital(word) {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }
