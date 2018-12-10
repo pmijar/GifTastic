@@ -8,9 +8,10 @@ Author : Prashanth K Mijar
 Date: 09-Dev-2018 
 */
 
+var GIF_LIMIT = 10;
 
-// Initial array of gifs
-var gifs = ["The Matrix", "The Notebook", "Mr. Nobody", "The Lion King"];
+// Initial array of topics
+var topics = ["The Matrix", "The Notebook", "Mr. Nobody", "The Lion King"];
 
 $(document).ready(function() {
 
@@ -19,7 +20,7 @@ renderButtons();
 $("#add-gif").on("click", function(event) {
   event.preventDefault();
   var gifVal = $("#gif-input").val().trim();
-  gifs.push(gifVal);
+  topics.push(gifVal);
   renderButtons();
 });
 
@@ -28,7 +29,7 @@ $("#gifButtonView").on("click","button",function(){
     displayGIFInfo($(this).attr("data-name"));
 })
 
-$("#gifView1").on("click","img", function() {
+$("#gifView").on("click","img", function() {
     console.log($(this));
     var state = $(this).attr("state");
 
@@ -48,12 +49,12 @@ $("#gifView1").on("click","img", function() {
 
 function renderButtons(){
     $("#gifButtonView").empty();
-    for (var i = 0; i < gifs.length; i++) {
+    for (var i = 0; i < topics.length; i++) {
       var gifButton = $("<button>");
       gifButton.addClass("type","button");
       gifButton.addClass("btn btn-outline-success btn-space");
-      gifButton.attr("data-name", gifs[i]);
-      gifButton.text(gifs[i]);
+      gifButton.attr("data-name", topics[i]);
+      gifButton.text(topics[i]);
       $("#gifButtonView").append(gifButton);
     }
   }
@@ -62,7 +63,7 @@ function renderButtons(){
     function displayGIFInfo(gifName) {
 
         console.log(gifName);
-        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=Sn1nsyDQL8lSLXzK1XPBWk42O286s03x&q=" + gifName + "&limit=10";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=Sn1nsyDQL8lSLXzK1XPBWk42O286s03x&q=" + gifName + "&limit=" + GIF_LIMIT;
 
         // Creating an AJAX call for the specific gif button being clicked
         $.ajax({
@@ -70,8 +71,7 @@ function renderButtons(){
           method: "GET"
         }).then(function(response) {
             console.log(response);
-            $("#gifView1").empty();
-            $("#gifView2").empty();
+            $("#gifView").empty();
             for(var i=0; i<response.data.length; i++ ){
                 var gifDiv = $("<div class='gif'>");
                 var image = $("<img>");
