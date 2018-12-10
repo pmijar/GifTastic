@@ -1,0 +1,32 @@
+body{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
+    background: url("../images/sky.jpg");
+    background-size:cover;
+}
+
+h1{
+    font-size:40px;
+    font-weight: bolder;
+    color: blue;  
+}
+
+#gifEntry-form{
+    font-size: 15px;    
+}
+
+.btn-space {
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+img{
+    float: left;
+    margin-top: 20px;
+    width:200px;
+    height:200px;
+}
+
+#gifView{
+    display:flex;
+}
