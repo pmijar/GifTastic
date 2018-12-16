@@ -3,7 +3,9 @@ This repository houses the GifTastic application developed using GIPHY API,  Jav
 
 ## GifTastic highlights ##
 
+This project would provide you the GIF images based on the topic selected. The user can add the gif topic and a button will be created. The created button when clicked would bring the corresponding gif images for that topic specific to that button. This program uses GIPHY API to have these images displayed to the user. The number of images returned by API can be controlled based on value set by the GIF_LIMIT variable. The GIF image displayed can be played or paused based on the click on that GIF image.
 
+Hope you enjoy this program...
 
 ## Game set up ##
 

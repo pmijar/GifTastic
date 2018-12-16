@@ -5,10 +5,10 @@ Rutgers Full Stack coding Bootcamp Program
 Description: This is GifTastic Program where system makes a call to GIPHY API 
 and renders the GIF's to the user. 
 Author : Prashanth K Mijar
-Date: 09-Dev-2018 
+Date: 15-Dec-2018 
 */
 
-var GIF_LIMIT = 25;
+var GIF_LIMIT = 15;
 
 // Initial array of topics
 var topics = ["Cats", "Dogs", "Pengiun", "Eagle"];
