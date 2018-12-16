@@ -8,7 +8,7 @@ Author : Prashanth K Mijar
 Date: 09-Dev-2018 
 */
 
-var GIF_LIMIT = 10;
+var GIF_LIMIT = 25;
 
 // Initial array of topics
 var topics = ["Cats", "Dogs", "Pengiun", "Eagle"];
@@ -77,7 +77,7 @@ function renderButtons(){
 
         console.log(gifName);
         var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=Sn1nsyDQL8lSLXzK1XPBWk42O286s03x&q=" + gifName + "&limit=" + GIF_LIMIT;
-
+        $(".checkRow").empty();
         // Creating an AJAX call for the specific gif button being clicked
         $.ajax({
           url: queryURL,
@@ -85,6 +85,8 @@ function renderButtons(){
         }).then(function(response) {
             console.log(response);
             for(var i=0; i<response.data.length; i++ ){
+                var parentDiv = $("<div>");
+                parentDiv.addClass("col-auto");
                 var gifDiv = $("<div class='gif'>");
                 var image = $("<img>");
                 image.attr("class","rounded");
@@ -96,10 +98,10 @@ function renderButtons(){
                 image.attr("stillGIF",urlStill);
                 image.attr("playGIF", urlPlay);
                 var gifRating = $("<p>").text("Rating: " + rating);
-                gifDiv.append(image);    
-                gifDiv.append(gifRating) 
-                $("#gifView"+i).empty();
-                $("#gifView"+i).append(gifDiv);
+                gifDiv.append(image, gifRating);  
+                parentDiv.append(gifDiv)  
+                //gifDiv.append(gifRating) 
+                $(".checkRow").append(parentDiv);
             }
         });
       }

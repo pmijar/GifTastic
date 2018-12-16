@@ -21,11 +21,9 @@ h1{
 }
 
 img{
-    float: left;
-    margin-top: 20px;
     width:200px;
     height:200px;
-    padding:10px;
+    padding-bottom: 10px;
 }
 
 p, label{
